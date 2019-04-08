@@ -2,10 +2,17 @@ package cn.qs.utils;
 
 
 import java.security.MessageDigest;
+import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
 
 public class MD5Util {
+	/**
+	 * 对数据进行加密   不可逆
+	 * @param source
+	 * @param salt
+	 * @return
+	 */
 	public static String md5(String source, String salt) {
 		String des = "";
 		try {
@@ -27,7 +34,19 @@ public class MD5Util {
 		return des;
 	}
 
+	
+	/**
+	 * 使用uuid生成主键
+	 * @return
+	 */
+	public static String createID(){
+		UUID uuid = UUID.randomUUID();
+		String id = uuid.toString();
+		return id.replace("-", "");
+	}
+	
 	public static void main(String[] args) {
 		System.out.println(md5("qlq","111"));
+		System.out.println(createID());
 	}
 }
