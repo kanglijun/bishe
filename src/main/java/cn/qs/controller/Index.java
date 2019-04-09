@@ -106,4 +106,9 @@ public class Index {
 	public String member_add() {
 		return "user-add";
 	}
+	
+	@RequestMapping("/updateUser")
+	public String updateUser(ModelMap map) {
+		return "updateUser";
+	}
 }

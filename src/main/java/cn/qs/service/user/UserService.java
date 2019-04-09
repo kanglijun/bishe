@@ -3,7 +3,7 @@ package cn.qs.service.user;
 import java.util.List;
 import java.util.Map;
 
-import cn.qs.bean.user.User;
+import cn.qs.bean.User;
 
 public interface UserService {
 
@@ -18,9 +18,9 @@ public interface UserService {
 
 	public List<User> getUsers(Map condition);
 
-	public void deleteUser(int id);
+	public void deleteUser(String userId);
 
-	public User getUser(int id);
+	public User getUser(String userId);
 
 	public void updateUser(User user);
 

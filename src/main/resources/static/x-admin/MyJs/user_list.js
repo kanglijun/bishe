@@ -14,6 +14,28 @@ function queryUsersFY(){
     });
 }
 
+/*****E 分页查询相关方法**********/
+
+function deleteUser(id){
+	var layer = layui.layer;
+	layer.confirm('确认删除?', function(index){
+		$.post("user/deleteUser.html",{"userId":id},function(result){
+			if(result.success == true){
+				layer.msg("删除成功!");
+				queryUsersFY();
+			}else{
+				layer.msg(result.msg);
+			}
+		});
+	  layer.close(index);
+	});
+}
+
+function updateUser(id){
+	var url = 'user/updateUser.html?userId='+id;
+	x_admin_show('修改用户',url,600,400);
+	//x_admin_show('添加用户','./user-add.html',600,400)
+}
 /**
  * 填充表格数据
  * @param pageInfo  ajax返回的参数信息
@@ -29,16 +51,16 @@ function showUsersTable(pageInfo){
         var index = (pageNum - 1) * pageSize + i + 1;
         var tr = "<tr>"
             +'<td>'+index+'</td>'
-            +'<td>'+replaceNull(users[i].id)+'</td>'
-            +'<td>'+replaceNull(users[i].username)+'</td>'
-            +'<td>'+replaceNull(users[i].fullname)+'</td>'
+            //+'<td>'+replaceNull(users[i].userId)+'</td>'
+            +'<td>'+replaceNull(users[i].code)+'</td>'
+            +'<td>'+replaceNull(users[i].name)+'</td>'
             +'<td>'+replaceNull(users[i].sex)+'</td>'
             +'<td>'+replaceNull(users[i].email)+'</td>'
-            +'<td>'+replaceNull(users[i].phone)+'</td>'
-            +'<td>'+replaceNull(users[i].createtime)+'</td>'
+            +'<td>'+replaceNull(users[i].number)+'</td>'
+            +'<td>'+replaceNull(users[i].createTime)+'</td>'
             +'<td>'
-            +'<a href=javascript:void(0) title="点击修改用户" onclick="updateUser('+users[i].id+')"><i class="layui-icon">&#xe642;</i></a>'
-            +'<a href=javascript:void(0) title="点击删除该用户" onclick="deleteUser('+users[i].id+')"><i class="layui-icon">&#xe640;</i></a>'
+            +'<a href=javascript:void(0) title="点击修改用户" onclick="updateUser(\''+users[i].userId+'\')"><i class="layui-icon">&#xe642;</i></a>'
+            +'<a href=javascript:void(0) title="点击删除该用户" onclick="deleteUser(\''+users[i].userId+'\')"><i class="layui-icon">&#xe640;</i></a>'
             +'</td></tr>'
         $("#memberTbody").append(tr);
     }
@@ -98,24 +120,3 @@ function clearQueryCondition(obj) {
 
 
 
-/*****E 分页查询相关方法**********/
-
-function deleteUser(id){
-	var layer = layui.layer;
-	layer.confirm('确认删除?', function(index){
-		$.post("user/deleteUser.html",{"id":id},function(result){
-			if(result.success == true){
-				layer.msg("删除成功!");
-				queryUsersFY();
-			}else{
-				layer.msg(result.msg);
-			}
-		});
-	  layer.close(index);
-	});
-}
-
-function updateUser(id){
-	var url = 'user/updateUser.html?id='+id;
-	x_admin_show('修改用户',url,600,400);
-}
