@@ -10,10 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.qs.bean.user.User;
-import cn.qs.bean.user.UserExample;
-import cn.qs.bean.user.UserExample.Criteria;
-import cn.qs.mapper.user.UserMapper;
+
+import cn.qs.bean.User;
+import cn.qs.bean.UserExample;
+import cn.qs.bean.UserExample.Criteria;
+import cn.qs.mapper.UserMapper;
 import cn.qs.service.user.UserService;
 import cn.qs.utils.MD5Util;
 
@@ -38,35 +39,29 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getUsers(Map condition) {
 		UserExample userExample = new UserExample();
-		if (StringUtils.isNotBlank(MapUtils.getString(condition, "username"))) {
+		if (StringUtils.isNotBlank(MapUtils.getString(condition, "code"))) {
 			Criteria createCriteria = userExample.createCriteria();
-			createCriteria.andUsernameLike("%" + MapUtils.getString(condition, "username") + "%");
+			createCriteria.andCodeLike("%" + MapUtils.getString(condition, "code") + "%");
 		}
 		List<User> list = userMapper.selectByExample(userExample);
 		return list;
 	}
 
 	@Override
-	public void deleteUser(int id) {
+	public void deleteUser(String id) {
 		userMapper.deleteByPrimaryKey(id);
 	}
 
-	@Override
-	public User getUser(int id) {
-		return userMapper.selectByPrimaryKey(id);
-	}
+	
 
-	@Override
-	public void updateUser(User user) {
-		userMapper.updateByPrimaryKeySelective(user);
-	}
+	
 
 	@Override
 	public User getUserByUserNameAndPassword(String username, String password) {
 		UserExample userExample = new UserExample();
 		Criteria createCriteria = userExample.createCriteria();
-		createCriteria.andUsernameEqualTo(username);
-		createCriteria.andPasswordEqualTo(MD5Util.md5(password, ""));
+		createCriteria.andCodeEqualTo(username);
+		createCriteria.andPwdEqualTo(MD5Util.md5(password, ""));
 
 		List<User> selectByExample = userMapper.selectByExample(userExample);
 		if (CollectionUtils.isNotEmpty(selectByExample)) {
@@ -77,10 +72,10 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findUserByUsername(String username) {
+	public User findUserByUsername(String code) {
 		UserExample userExample = new UserExample();
 		Criteria createCriteria = userExample.createCriteria();
-		createCriteria.andUsernameEqualTo(username);
+		createCriteria.andCodeEqualTo(code);
 
 		List<User> users = userMapper.selectByExample(userExample);
 		if (CollectionUtils.isEmpty(users)) {
@@ -88,5 +83,17 @@ public class UserServiceImpl implements UserService {
 		}
 
 		return users.get(0);
+	}
+
+	@Override
+	public User getUser(String id) {
+		
+		return userMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public void updateUser(User user) {
+		// TODO Auto-generated method stub
+		userMapper.updateByPrimaryKey(user);
 	}
 }

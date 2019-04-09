@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import cn.qs.bean.user.User;
+import cn.qs.bean.User;
 import cn.qs.service.user.UserService;
 import cn.qs.utils.JSONResultUtil;
 
@@ -46,7 +46,7 @@ public class LoginController {
 		User loginUser = null;
 		if (username.equals("admin") && password.equals("admin")) {
 			loginUser = new User();
-			loginUser.setFullname("系统管理员");
+			loginUser.setCode("系统管理员");
 		} else {
 			loginUser = userService.getUserByUserNameAndPassword(username, password);
 		}

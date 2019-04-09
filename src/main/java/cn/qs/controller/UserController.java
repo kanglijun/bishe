@@ -1,5 +1,6 @@
 package cn.qs.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
-import cn.qs.bean.user.User;
+import cn.qs.bean.User;
 import cn.qs.service.user.UserService;
 import cn.qs.utils.DefaultValue;
 import cn.qs.utils.JSONResultUtil;
@@ -45,13 +46,14 @@ public class UserController {
 	@RequestMapping("addUser")
 	@ResponseBody
 	public JSONResultUtil addUser(User user) {
-		User findUser = userService.findUserByUsername(user.getUsername());
+		User findUser = userService.findUserByUsername(user.getCode());
 		if (findUser != null) {
 			return JSONResultUtil.error("用户已经存在");
 		}
-
-		user.setCreatetime(new Date());
-		user.setPassword(MD5Util.md5(user.getPassword(), ""));// md5加密密码
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		user.setCreateTime(sdf.format(new Date()));
+		user.setPwd(MD5Util.md5(user.getPwd(), ""));// md5加密密码
+		user.setUserId(MD5Util.createID());
 		logger.info("user -> {}", user);
 		userService.addUser(user);
 		return JSONResultUtil.ok();
@@ -95,8 +97,9 @@ public class UserController {
 	 */
 	@RequestMapping("deleteUser")
 	@ResponseBody
-	public JSONResultUtil deleteUser(int id) {
-		userService.deleteUser(id);
+	public JSONResultUtil deleteUser(String userId) {
+		System.out.println("删除用户id:"+userId);
+		userService.deleteUser(userId);
 		return JSONResultUtil.ok();
 	}
 
@@ -107,9 +110,10 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("updateUser")
-	public String updateUser(int id, ModelMap map) {
-		User user = userService.getUser(id);
+	public String updateUser(String userId, ModelMap map) {
+		User user = userService.getUser(userId);
 		map.addAttribute("user", user);
+		System.out.println("修改用户id:"+userId);
 		return "updateUser";
 	}
 
@@ -124,7 +128,11 @@ public class UserController {
 	@ResponseBody
 	public JSONResultUtil doUpdateUser(User user) {
 		logger.info("user -> {}", user);
+		SimpleDateFormat sdf = new SimpleDateFormat();
+		user.setCreateTime(sdf.format(new Date()));
 		userService.updateUser(user);
+		System.out.println("修改id："+user.getUserId()+user.getCode());
 		return JSONResultUtil.ok();
 	}
+	
 }
