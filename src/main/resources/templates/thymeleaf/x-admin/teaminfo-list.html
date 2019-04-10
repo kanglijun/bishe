@@ -16,7 +16,7 @@
     
     <!--自己写的JS  -->
     <script type="text/javascript" th:src="${#httpServletRequest.getContextPath()+'/static/x-admin/MyJs/PublicFunctions.js'}"></script>
-    
+    <script type="text/javascript" th:src="${#httpServletRequest.getContextPath()+'/static/x-admin/MyJs/team.js'}"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -26,19 +26,26 @@
   
   <body class="layui-anim layui-anim-up">
    
+   <style>
+		a:hover{
+			color:#f24f00;
+			text-decoration:underline;		
+		} 
+		a{
+			color:blue;
+		}  
+   </style>
     <div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so" id="queryUserForm">
+        <form class="layui-form layui-col-md12 x-so" id="queryTeamForm">
           <!--隐藏当前页和页号-->
           <input type="hidden" name="pageNum"/>
           <input type="hidden" name="pageSize"/>
           
           <span>球队名称：</span>
-          <input type="text" name="teamname"  placeholder="请输入球队名称" autocomplete="off" class="layui-input" style="margin-right:2%;"/>
-          <span>主教练中文名：</span>
-          <input type="text" name="teamname"  placeholder="请输入主教练姓名" autocomplete="off" class="layui-input" style="margin-right:2%;"/>
-          
-          <button class="layui-btn" type="button" onclick="queryUsersFY()"><i class="layui-icon">&#xe615;</i></button>
+          <input type="text" name="teamName"  placeholder="请输入球队名称" autocomplete="off" class="layui-input" style="margin-right:2%;"/>
+       
+          <button class="layui-btn" type="button" onclick="queryTeamsFY()"><i class="layui-icon">&#xe615;</i></button>
           <button class="layui-btn layui-btn-normal" type="button" onclick='clearQueryCondition(this)' title="点击重置查询条件"><i class="layui-icon">&#xe639;</i></button>
         </form>
       </div>
@@ -47,17 +54,16 @@
         <span class="x-right" style="line-height:40px">球队列表</span>
       </xblock>
       <table class="layui-table">
+      
         <thead>
           <tr>
             <th>序号</th>
-            <th>中文名</th>
-            <th>英文名</th>
+            <th>球队名称</th>
             <th>进入NBA（年）</th>
             <th>主场</th>
             <th>分区</th>
             <th>官网</th>
             <th>主教练</th>
-            <th>球队简述</th>
             <th>操作</th>
             </tr>
         </thead>

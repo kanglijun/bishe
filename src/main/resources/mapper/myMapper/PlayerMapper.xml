@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qs.mapper.player.MyPlayerMapper">
+	<resultMap type="cn.qs.bean.Player" id="playerTeamDetail">
+
+		<id column="player_id" property="playerId" jdbcType="VARCHAR" />
+	    <result column="team_id" property="teamId" jdbcType="VARCHAR" />
+	    <result column="name" property="name" jdbcType="VARCHAR" />
+	    <result column="weight" property="weight" jdbcType="VARCHAR" />
+	    <result column="height" property="height" jdbcType="VARCHAR" />
+	    <result column="birth" property="birth" jdbcType="VARCHAR" />
+	    <result column="country" property="country" jdbcType="VARCHAR" />
+	    <result column="contract" property="contract" jdbcType="VARCHAR" />
+	    <result column="school" property="school" jdbcType="VARCHAR" />
+	    <result column="salary" property="salary" jdbcType="VARCHAR" />
+	    <result column="number" property="number" jdbcType="VARCHAR" />
+	    <result column="location" property="location" jdbcType="VARCHAR" />
+	    <result column="Penalty_shot" property="penaltyShot" jdbcType="VARCHAR" />
+	    <result column="ps_hit_rate" property="psHitRate" jdbcType="VARCHAR" />
+	    <result column="three" property="three" jdbcType="VARCHAR" />
+	    <result column="three_hit_rate" property="threeHitRate" jdbcType="VARCHAR" />
+	    <result column="shoot" property="shoot" jdbcType="VARCHAR" />
+	    <result column="shoot_hit_rate" property="shootHitRate" jdbcType="VARCHAR" />
+	    <result column="time" property="time" jdbcType="VARCHAR" />
+	    <result column="backboard" property="backboard" jdbcType="VARCHAR" />
+	    <result column="block_shot" property="blockShot" jdbcType="VARCHAR" />
+	    <result column="steals" property="steals" jdbcType="VARCHAR" />
+	    <result column="error" property="error" jdbcType="VARCHAR" />
+	    <result column="break_rules" property="breakRules" jdbcType="VARCHAR" />
+	    <result column="play_round" property="playRound" jdbcType="VARCHAR" />
+	    <result column="score" property="score" jdbcType="VARCHAR" />
+	    <result column="remark1" property="remark1" jdbcType="VARCHAR" />
+	    <result column="remark2" property="remark2" jdbcType="VARCHAR" />
+		
+		<!-- association ：配置一对一属性 -->
+
+		<!-- property:Player里面的Team属性名 -->
+
+		<!-- javaType:属性类型 -->
+
+		<association property="team" javaType="cn.qs.bean.Team">
+			<!-- id:声明主键，表示team_id是关联查询对象的唯一标识 -->
+			<id column="team_id" property="teamId" jdbcType="VARCHAR" />
+		    <result column="team_name" property="teamName" jdbcType="VARCHAR" />
+		    <result column="into_time" property="intoTime" jdbcType="VARCHAR" />
+		    <result column="home_court" property="homeCourt" jdbcType="VARCHAR" />
+		    <result column="url" property="url" jdbcType="VARCHAR" />
+		    <result column="area" property="area" jdbcType="VARCHAR" />
+		    <result column="coach_id" property="coachId" jdbcType="VARCHAR" />
+		    <result column="coach_name" property="coachName" jdbcType="VARCHAR" />
+		    <result column="background" property="background" jdbcType="VARCHAR" />
+		    <result column="Average_score" property="averageScore" jdbcType="VARCHAR" />
+		    <result column="Average_Assists" property="averageAssists" jdbcType="VARCHAR" />
+		    <result column="Average_backboard" property="averageBackboard" jdbcType="VARCHAR" />
+		    <result column="Average_lose_score" property="averageLoseScore" jdbcType="VARCHAR" />
+		    <result column="Average_error" property="averageError" jdbcType="VARCHAR" />
+		    <result column="remark1" property="remark1" jdbcType="VARCHAR" />
+		    <result column="remark2" property="remark2" jdbcType="VARCHAR" />
+		</association>
+
+	</resultMap>
+
+	<!-- 一对一关联 --> 
+	<select id="selectPlayersByMap" resultMap="playerTeamDetail" parameterType="Map">
+		 select * from player
+		 left join team 
+		 on player.team_id = team.team_id
+		 <where>
+		 	<if test="playerId!=null and playerId!=''">
+		 		player.player_id = #{playerId}
+		 	</if>
+		 	<if test="name!=null and name!=''">
+		 		player.name LIKE CONCAT(CONCAT('%', #{name}),'%') 
+		 	</if>
+		 </where>
+	</select> 
+</mapper> 
+
+
+

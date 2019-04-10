@@ -28,94 +28,58 @@
                   <span class="x-red">*</span>中文名
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="L_userfullname" name="fullname" lay-verify="required"
+                  <input type="text" id="L_userfullname" name="name" lay-verify="required"
                   autocomplete="off" class="layui-input"/>
               </div>
           </div>
           <div class="layui-form-item">
               <label for="L_username" class="layui-form-label">
-                  <span class="x-red">*</span>英文名
+                  <span class="x-red">*</span>生日
               </label>
               <div class="layui-input-inline">
-                  <input type="text" id="L_username" name="username" required="" lay-verify="required"
+                  <input type="text" id="L_username" name="birth" required="" lay-verify="required"
                   autocomplete="off" class="layui-input"/>
               </div>
           </div>
           <div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-                  <span class="x-red"></span>运动项目
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_email" name="email" lay-verify="email"
-                  autocomplete="off" class="layui-input"/>
-              </div>
-          </div>
+				<label class="layui-form-label">搜索选择球队</label>
+				<div class="layui-input-inline">
+					<select name="teamId" lay-search="" lay-verify="required">
+						<option value="">直接选择或搜索选择</option>
+						<option th:each="persion:${teams}" th:text="${persion.teamName}" th:value="${persion.teamId}"></option>
+					</select>
+				</div>
+		  </div>
+		  
           <div class="layui-form-item">
-              <label for="L_pass" class="layui-form-label">
-                  <span class="x-red">*</span>身高
-              </label>
-              <div class="layui-input-inline">
-                  <input type="password" id="L_password" name="password" required="" lay-verify="required"
-                  autocomplete="off" class="layui-input"/>
-              </div>
-              
-          </div>
-          <div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-                  <span class="x-red"></span>体重
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_phone" name="phone" lay-verify="required"
-                  autocomplete="off" class="layui-input"/>
-              </div>
-          </div>
-          
-           <div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-                  <span class="x-red"></span>年龄
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_email" name="email" lay-verify="email"
-                  autocomplete="off" class="layui-input"/>
-              </div>
-          </div>
-           <div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-                  <span class="x-red"></span>生日
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_email" name="email" lay-verify="email"
-                  autocomplete="off" class="layui-input"/>
-              </div>
-          </div>
-           <div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-                  <span class="x-red"></span>毕业院校
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_email" name="email" lay-verify="email"
-                  autocomplete="off" class="layui-input"/>
-              </div>
-          </div>
-           <div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-                  <span class="x-red"></span>国籍
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_email" name="email" lay-verify="email"
-                  autocomplete="off" class="layui-input"/>
-              </div>
-          </div>
-           <div class="layui-form-item">
-              <label for="L_email" class="layui-form-label">
-                  <span class="x-red"></span>所属球队
-              </label>
-              <div class="layui-input-inline">
-                  <input type="text" id="L_email" name="email" lay-verify="email"
-                  autocomplete="off" class="layui-input"/>
-              </div>
-          </div>
-          
+		    <label class="layui-form-label">性别</label>
+		    <div class="layui-input-block">
+		      <input type="radio" name="sex" value="男" title="男"/>
+		      <input type="radio" name="sex" value="女" title="女" checked="checked"/>
+		    </div>
+		    
+		  </div>
+          <div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">执教战绩</label>
+				<div class="layui-input-block">
+					<textarea class="layui-textarea" name="teachingScore" 
+					    placeholder="请输入内容"></textarea>
+				</div>
+			</div>
+          <div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">个人荣耀</label>
+				<div class="layui-input-block">
+					<textarea class="layui-textarea" name="personalGlory" 
+					    placeholder="请输入内容"></textarea>
+				</div>
+			</div>
+          <div class="layui-form-item layui-form-text">
+				<label class="layui-form-label">生涯简介</label>
+				<div class="layui-input-block">
+					<textarea class="layui-textarea" name="background" 
+					    placeholder="请输入内容"></textarea>
+				</div>
+			</div>
          
           <div class="layui-form-item">
               <label for="L_repass" class="layui-form-label">
@@ -135,7 +99,7 @@
           //监听提交
           form.on('submit(add)', function(data){
        	    //异步提交数据
-       	    $.post("user/playerinfo-add.html",data.field,function(response){
+       	    $.post("../coach/addCoach.html",data.field,function(response){
        	    	if(response.success == true){
        	    	  layer.msg("增加成功", {icon: 6},function () {
                       // 获得frame索引
