@@ -56,6 +56,8 @@ public class Player {
     private String remark1;
 
     private String remark2;
+    
+    private Team team;
 
     public String getPlayerId() {
         return playerId;
@@ -280,4 +282,14 @@ public class Player {
     public void setRemark2(String remark2) {
         this.remark2 = remark2 == null ? null : remark2.trim();
     }
+
+	public Team getTeam() {
+		return team;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
+	}
+    
+    
 }

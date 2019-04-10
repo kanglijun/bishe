@@ -111,4 +111,14 @@ public class Index {
 	public String updateUser(ModelMap map) {
 		return "updateUser";
 	}
+	
+	@RequestMapping("/updateTeam")
+	public String updateTeam(ModelMap map) {
+		return "updateTeam";
+	}
+	
+	@RequestMapping("/updatePlayer")
+	public String updatePlayer(ModelMap map) {
+		return "updatePlayer";
+	}
 }
