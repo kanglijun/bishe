@@ -46,8 +46,8 @@ public class CoachServiceimpl implements CoachService {
 
 	@Override
 	public void deleteCoach(String coachId) {
-		// TODO Auto-generated method stub
 		
+		coachMapper.deleteByPrimaryKey(coachId);
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class CoachServiceimpl implements CoachService {
 
 	@Override
 	public void updateCoach(Coach coach) {
-		// TODO Auto-generated method stub
+		coachMapper.updateByPrimaryKeySelective(coach);
 		
 	}
 

@@ -29,12 +29,12 @@
    
     <div class="x-body">
       <div class="layui-row">
-        <form class="layui-form layui-col-md12 x-so" id="queryUserForm">
+        <form class="layui-form layui-col-md12 x-so" id="queryCoachForm">
           <!--隐藏当前页和页号-->
           <input type="hidden" name="pageNum"/>
           <input type="hidden" name="pageSize"/>
           <span>教练名：</span>
-          <input type="text" name="name"  placeholder="请输入主教练中文名" autocomplete="off" class="layui-input" style="margin-right:2%;"/>
+          <input type="text" name="name"  placeholder="请输入球员姓名" autocomplete="off" class="layui-input" style="margin-right:2%;"/>
           <button class="layui-btn" type="button" onclick="queryCoachsFY()"><i class="layui-icon">&#xe615;</i></button>
           <button class="layui-btn layui-btn-normal" type="button" onclick='clearQueryCondition(this)' title="点击重置查询条件"><i class="layui-icon">&#xe639;</i></button>
         </form>

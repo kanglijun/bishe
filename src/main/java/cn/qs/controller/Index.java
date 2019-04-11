@@ -29,8 +29,8 @@ public class Index {
 		return "bar";
 	}
 
-	@RequestMapping("/getradar")
-	public String radar() {
+	@RequestMapping("/radar")
+	public String radar(ModelMap map) {
 		return "radar";
 	}
 	
@@ -120,5 +120,10 @@ public class Index {
 	@RequestMapping("/updatePlayer")
 	public String updatePlayer(ModelMap map) {
 		return "updatePlayer";
+	}
+	
+	@RequestMapping("/updateCoach")
+	public String updateCoach(ModelMap map) {
+		return "updateCoach";
 	}
 }

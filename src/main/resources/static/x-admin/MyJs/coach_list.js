@@ -22,7 +22,7 @@ function deleteCoach(id){
 		$.post("coach/deleteCoach.html",{"coachId":id},function(result){
 			if(result.success == true){
 				layer.msg("删除成功!");
-				queryCoachFY();
+				queryCoachsFY();
 			}else{
 				layer.msg(result.msg);
 			}

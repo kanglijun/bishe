@@ -74,7 +74,7 @@ public class PlayerContrller {
 		// 开始分页
 		PageHelper.startPage(pageNum, pageSize);
 		List<Player> players = new ArrayList<Player>();
-		System.out.println("获取球员信息："+(String)condition.get("name"));
+		System.out.println("获取球员信息："+(String)condition.get("tiaojian"));
 		try {
 			players = playerService.selectPlayerDetail(condition);
 		} catch (Exception e) {
@@ -116,6 +116,25 @@ public class PlayerContrller {
 		map.addAttribute("teams", teams);
 //		System.out.println("修改用户id:"+userId);
 		return "updatePlayer";
+	}
+	
+	@RequestMapping("radar")
+	public String getradar(ModelMap map) {
+		System.out.println("球员六芒星");
+		Map map1 = new HashMap();
+		List<Player> players = playerService.selectPlayerDetail(map1);
+		map.addAttribute("players", players);
+		return "radar";
+	}
+	
+	@RequestMapping("radarplay")
+	@ResponseBody
+	public List<Player> radarplay(@RequestParam Map condition) {
+		System.out.println("球员六芒星:"+(String)condition.get("name"));
+	
+		List<Player> players = playerService.selectPlayerDetail(condition);
+		
+		return players;
 	}
 
 	/**

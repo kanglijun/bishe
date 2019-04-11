@@ -44,8 +44,29 @@ public class TeamServiceImpl implements TeamService{
 	public List<Team> getTeams(Map condition) {
 
 		TeamExample teamExample = new TeamExample();
+		String tiaojian = (String)condition.get("tiaojian");
+		if(tiaojian==null || "".equals(tiaojian)){
+			tiaojian = "defen";
+		}
+		String orderBy = "";
+		switch(tiaojian){
+			case "defen":orderBy="Average_score";
+			break;
+			case "zhugong":orderBy="Average_Assists";
+			break;
+			case "lanban":orderBy="Average_backboard";
+			break;
+			case "shifen":orderBy="Average_lose_score";
+			break;
+			case "shiwu":orderBy="Average_error";
+			break;
+		}
+		orderBy = orderBy+"+0 desc";
+		System.out.println("orderby:"+orderBy);
+		teamExample.setOrderByClause(orderBy);
+		Criteria createCriteria = teamExample.createCriteria();
 		if (StringUtils.isNotBlank(MapUtils.getString(condition, "teamName"))) {
-			Criteria createCriteria = teamExample.createCriteria();
+			
 			createCriteria.andTeamNameLike("%" + MapUtils.getString(condition, "teamName") + "%");
 		}
 		List<Team> list = teamMapper.selectByExample(teamExample);

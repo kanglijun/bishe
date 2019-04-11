@@ -67,7 +67,7 @@ public class TeamController {
 		// 开始分页
 		PageHelper.startPage(pageNum, pageSize);
 		List<Team> teams = new ArrayList<Team>();
-		System.out.println("获取球员信息："+(String)condition.get("teamName"));
+		System.out.println("获取球员信息："+(String)condition.get("tiaojian"));
 		try {
 			teams = teamService.getTeams(condition);
 		} catch (Exception e) {

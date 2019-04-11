@@ -73,6 +73,7 @@
 		 		player.name LIKE CONCAT(CONCAT('%', #{name}),'%') 
 		 	</if>
 		 </where>
+		 order by ${column}*1 desc
 	</select> 
 </mapper> 
 
