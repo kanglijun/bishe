@@ -23,9 +23,7 @@ function queryradaar(){
     });
 }
 
-function finddetail(id){
-	$("#code").val("");
-}
+
 
 function checkedPlayer1(obj){
 	
@@ -40,7 +38,13 @@ function checkedPlayer1(obj){
 	
 };
 
-
+function finddetail(id){
+//	var myChart = echarts.init(document.getElementById('code'));
+//	myChart.setOption({title : {text : '新标题'}});
+	$("#sidebar-code").html("");
+	refresh(true);
+	alert($("#sidebar-code").html());
+}
 
 function checkedPlayer2(obj){
 	
