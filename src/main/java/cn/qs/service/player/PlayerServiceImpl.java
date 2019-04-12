@@ -1,5 +1,6 @@
 package cn.qs.service.player;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -75,8 +76,32 @@ public class PlayerServiceImpl implements PlayerService{
 
 	@Override
 	public List<Player> selectPlayerDetail(Map map) {
-		
+		//对条件数据进行处理
+		String tiaojian = (String)map.get("tiaojian");
+		if(tiaojian==null || "".equals(tiaojian)){
+			tiaojian = "defen";
+		}
+		String orderBy = "";
+		switch(tiaojian){
+			case "defen":orderBy="score";
+			break;
+			case "toulan":orderBy="shoot";
+			break;
+			case "sanfen":orderBy="three";
+			break;
+			case "faqiu":orderBy="Penalty_shot";
+			break;
+			case "lanban":orderBy="backboard";
+			break;
+			case "shiwu":orderBy="error";
+			break;
+			case "gaimao":orderBy="block_shot";
+			break;
+			case "qiangduan":orderBy="steals";
+			break;
+		}
+		map.put("column", orderBy);
+		//System.out.println("orderBy:"+orderBy);
 		return PlayerMapper.selectPlayersByMap(map);
 	}
-	
 }

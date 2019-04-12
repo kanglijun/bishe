@@ -1,6 +1,7 @@
 package cn.qs.controller.coach;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
 import cn.qs.bean.Coach;
-import cn.qs.bean.Coach;
+import cn.qs.bean.Team;
 import cn.qs.service.coach.CoachService;
 import cn.qs.service.team.TeamService;
 import cn.qs.utils.DefaultValue;
@@ -74,6 +75,7 @@ public class CoachController {
 		List<Coach> coachs = new ArrayList<Coach>();
 		try {
 			coachs = coachService.selectCoachDetail(condition);
+			
 		} catch (Exception e) {
 			logger.error("getUsers error！", e);
 		}
@@ -92,7 +94,7 @@ public class CoachController {
 	@ResponseBody
 	public JSONResultUtil deleteCoach(String coachId) {
 		//System.out.println("删除球员id:"+coachId);
-		//coachService.deleteCoach(coachId);
+		coachService.deleteCoach(coachId);
 		return JSONResultUtil.ok();
 	}
 
@@ -104,14 +106,14 @@ public class CoachController {
 	 */
 	@RequestMapping("updateCoach")
 	public String updateCoach(String coachId, ModelMap map) {
-//		Map map1 = new HashMap();
-//		map1.put("coachId", coachId);
-//		List<Coach> coachs = coachService.selectCoachDetail(map1);
-//		List<Team> teams = teamService.findAllTeam();
-//		Coach coach = coachs.get(0);
-//		map.addAttribute("coach", coach);
-//		map.addAttribute("teams", teams);
-////		System.out.println("修改用户id:"+userId);
+		Map map1 = new HashMap();
+		map1.put("coachId", coachId);
+		List<Coach> coachs = coachService.selectCoachDetail(map1);
+		List<Team> teams = teamService.findAllTeam();
+		Coach coach = coachs.get(0);
+		map.addAttribute("coach", coach);
+		map.addAttribute("teams", teams);
+//		System.out.println("修改用户id:"+userId);
 		return "updateCoach";
 	}
 
@@ -125,7 +127,7 @@ public class CoachController {
 	@RequestMapping("doUpdateCoach")
 	@ResponseBody
 	public JSONResultUtil doUpdateUser(Coach coach) {
-		//coachService.updateCoach(coach);
+		coachService.updateCoach(coach);
 		return JSONResultUtil.ok();
 	}
 	
