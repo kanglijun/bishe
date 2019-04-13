@@ -104,4 +104,23 @@ public class PlayerServiceImpl implements PlayerService{
 		//System.out.println("orderBy:"+orderBy);
 		return PlayerMapper.selectPlayersByMap(map);
 	}
+
+	@Override
+	public Map<String, String> selectMaxDataPlayer() {
+		Map map = PlayerMapper.selectMaxDataFromPlayer();
+		System.out.println(map.toString());
+		Double maxd = Formatdata.format((String)map.get("maxd"));
+		Double maxf = Formatdata.format((String)map.get("maxf"));
+		Double maxz = Formatdata.format((String)map.get("maxz"));
+		Double quan = 0.2;
+
+		Double maxj = (maxd*quan)+(maxf*quan)+(maxz*quan)+20+20;
+		map.put("maxd",maxd);
+		map.put("maxf",maxf);
+		map.put("maxz",maxz);
+		map.put("maxj",maxj);
+		
+		return map;
+	}
+
 }

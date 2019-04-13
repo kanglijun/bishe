@@ -21,6 +21,7 @@ import com.github.pagehelper.PageInfo;
 import cn.qs.bean.Player;
 import cn.qs.bean.Team;
 import cn.qs.bean.User;
+import cn.qs.service.player.Formatdata;
 import cn.qs.service.player.PlayerService;
 import cn.qs.service.team.TeamService;
 import cn.qs.utils.DefaultValue;
@@ -123,18 +124,97 @@ public class PlayerContrller {
 		System.out.println("球员六芒星");
 		Map map1 = new HashMap();
 		List<Player> players = playerService.selectPlayerDetail(map1);
+		Map maxmap = playerService.selectMaxDataPlayer();
 		map.addAttribute("players", players);
+		map.addAttribute("maxdefen", maxmap.get("maxd"));
+		map.addAttribute("maxfangshou", maxmap.get("maxf"));
+		map.addAttribute("maxzuzhi", maxmap.get("maxz"));
+		map.addAttribute("maxwaixian", "100");
+		map.addAttribute("maxneixian", "100");
+		map.addAttribute("maxzonghe", maxmap.get("maxj"));
 		return "radar";
+	}
+	
+	@RequestMapping("bar")
+	public String getbar(ModelMap map) {
+		System.out.println("球员比较");
+		Map map1 = new HashMap();
+		List<Player> players = playerService.selectPlayerDetail(map1);
+//		Map maxmap = playerService.selectMaxDataPlayer();
+		map.addAttribute("players", players);
+//		map.addAttribute("maxdefen", maxmap.get("maxd"));
+//		map.addAttribute("maxfangshou", maxmap.get("maxf"));
+//		map.addAttribute("maxzuzhi", maxmap.get("maxz"));
+//		map.addAttribute("maxwaixian", "100");
+//		map.addAttribute("maxneixian", "100");
+//		map.addAttribute("maxzonghe", maxmap.get("maxj"));
+		return "bar";
 	}
 	
 	@RequestMapping("radarplay")
 	@ResponseBody
 	public List<Player> radarplay(@RequestParam Map condition) {
-		System.out.println("球员六芒星:"+(String)condition.get("name"));
+		
 	
 		List<Player> players = playerService.selectPlayerDetail(condition);
 		
 		return players;
+	}
+	
+	
+	
+	@RequestMapping("getPlayerById")
+	@ResponseBody
+	public Map getPlayerById(@RequestParam Map condition) {
+		String playerid = (String)condition.get("playerid");
+		Player player = playerService.getPlayer(playerid);
+		condition.put("name", player.getName());
+		
+		Double d = Formatdata.format(player.getScore());
+		Double f = Formatdata.format(player.getBlockShot());
+		Double z = Formatdata.format(player.getRemark1());
+		Double w = Formatdata.format(player.getThreeHitRate());
+		Double n = Formatdata.format(player.getPsHitRate());
+		Double j = (d*0.2)+(f*0.2)+(z*0.2)+(w*0.2)+(n*0.2);
+		
+		
+		
+		condition.put("defen", d);
+		condition.put("fangshou", f);
+		condition.put("zuzhi", z);
+		condition.put("waixian", w);
+		condition.put("neixian", n);
+		condition.put("zonghe", j);
+		
+		return condition;
+	}
+	
+	@RequestMapping("getPlayerByIds")
+	@ResponseBody
+	public List<Player> getPlayerByIds(@RequestParam Map condition) {
+		List<Player> list = new ArrayList<Player>();
+		String playerid1 = (String)condition.get("player1");
+		String playerid2 = (String)condition.get("player2");
+		if(playerid1==null||"".equals(playerid1)){
+			playerid1="||||";
+		}
+		if(playerid2==null||"".equals(playerid2)){
+			playerid2="||||";
+		}
+		Player player1 = playerService.getPlayer(playerid1);
+		Player player2 = playerService.getPlayer(playerid2);
+		
+		if(player1==null){
+			player1=new Player();
+		}
+		if(player2==null){
+			player2=new Player();
+		}
+		System.out.println("player1:"+player1.getName());
+		System.out.println("player2:"+player2.getName());
+		list.add(player1);
+		list.add(player2);
+		return list;
 	}
 
 	/**

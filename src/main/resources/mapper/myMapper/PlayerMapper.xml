@@ -74,7 +74,11 @@
 		 	</if>
 		 </where>
 		 order by ${column}*1 desc
-	</select> 
+	</select>
+	
+	<select id="selectMaxDataFromPlayer" resultType="Map">
+		select MAX(score) as maxs,MAX(block_shot) as maxf,MAX(remark1) as maxz from player;
+	</select>  
 </mapper> 
 
 

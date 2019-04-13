@@ -7,4 +7,5 @@ import cn.qs.bean.Player;
 
 public interface MyPlayerMapper {
 	List<Player> selectPlayersByMap(Map map);
+	Map<String,String> selectMaxDataFromPlayer();
 }
