@@ -27,5 +27,7 @@ public interface PlayerService {
 	public void updatePlayer(Player player);
 	
 	public List<Player> selectPlayerDetail(Map map);
+	
+	public Map<String,String> selectMaxDataPlayer();
 
 }

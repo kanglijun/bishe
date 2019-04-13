@@ -24,8 +24,8 @@ public class Index {
 		return "welcome";
 	}
 
-	@RequestMapping("/getbar")
-	public String bar() {
+	@RequestMapping("/bar")
+	public String bar(ModelMap map) {
 		return "bar";
 	}
 
