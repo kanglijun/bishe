@@ -203,7 +203,26 @@ public class PlayerContrller {
 			playerid2="||||";
 		}
 		Player player1 = playerService.getPlayer(playerid1);
+		if(player1==null){
+			player1 = new Player();
+		}
+		if(player1.getThreeHitRate()!=null){
+			player1.setThreeHitRate(player1.getThreeHitRate().replace("%", ""));
+		}if(player1.getPsHitRate()!=null){
+			player1.setPsHitRate(player1.getPsHitRate().replace("%", ""));
+		}
+		player1.setRemark2(String.valueOf(formatPlayerData(player1)));
+		
 		Player player2 = playerService.getPlayer(playerid2);
+		if(player2==null){
+			player2 = new Player();
+		}
+		if(player2.getThreeHitRate()!=null){
+			player2.setThreeHitRate(player2.getThreeHitRate().replace("%", ""));
+		}if(player2.getPsHitRate()!=null){
+			player2.setPsHitRate(player2.getPsHitRate().replace("%", ""));
+		}
+		player2.setRemark2(String.valueOf(formatPlayerData(player2)));
 		
 		if(player1==null){
 			player1=new Player();
@@ -241,6 +260,31 @@ public class PlayerContrller {
 		List<Player> list = new ArrayList<Player>();
 		list = playerService.searchMarchingPlayer(condition);
 		return list;
+	}
+	
+	public static Double formatPlayerData(Player player){
+		Double score = 0.0;
+		Double fs = 0.0;
+		Double zz = 0.0;
+		Double wx = 0.0;
+		Double nx = 0.0;
+		Double zh = 0.0;
+		if(player.getScore()!=null){
+			score = Double.valueOf(player.getScore());
+		}
+		if(player.getBlockShot()!=null){
+			score = Double.valueOf(player.getBlockShot());
+		}
+		if(player.getRemark1()!=null){
+			score = Double.valueOf(player.getRemark1());
+		}
+		if(player.getThreeHitRate()!=null){
+			score = Double.valueOf(player.getThreeHitRate());
+		}
+		if(player.getPsHitRate()!=null){
+			score = Double.valueOf(player.getPsHitRate());
+		}
+		return score*0.2+fs*0.2+zz*0.2+wx*0.2+nx*0.2;
 	}
 	
 }
