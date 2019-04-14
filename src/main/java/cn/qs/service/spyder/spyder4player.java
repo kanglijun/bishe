@@ -42,7 +42,7 @@ public class spyder4player extends spyderUtil implements spyderMethod,Runnable{
 	 * 获取球员数据爬虫
 	 */
 	public  void spyderUtil4player() {
-		logger.info("开始 获取球员数据爬虫..");
+		logger.info("开始 获取球员数据..");
 		try {
 			
 			PLAYERCOUNTLIST.add("开始从网络读取数据...");
@@ -81,12 +81,19 @@ public class spyder4player extends spyderUtil implements spyderMethod,Runnable{
 				String numLocation = (String) playerMap.get("location");
 				playerMap.put("number","0");  //号码
 				playerMap.put("location","0");//位置
-				if(numLocation!=null && "".equals(numLocation)){
+				System.out.println("here : " + numLocation);
+				if(numLocation!=null && !"".equals(numLocation)){
+					numLocation = numLocation.replace("）", "");
 					String[] numLoc = numLocation.split("（"); 
-					playerMap.put("number",numLoc[0]); 
-					playerMap.put("location","（"+numLoc[1]);
+					if(numLoc.length>=2){
+						playerMap.put("number",numLoc[0]); 
+						playerMap.put("location",numLoc[1]);
+					}else{
+						playerMap.put("number",numLoc[0]); 
+					}
+					
 				}
-				
+				System.out.println("he : " +numLocation + "  num :"+playerMap.get("number") + "   location: " + playerMap.get("location"));
 				playerMapper.insertByMap(playerMap);
 				logger.info("一条球员信息获取成功");
 				PLAYERCOUNTLIST.add(" -->"+ playerMap.get("name")+"  的个人信息保存数据库成功！！！");
@@ -105,6 +112,7 @@ public class spyder4player extends spyderUtil implements spyderMethod,Runnable{
 		}
 
 	}
+	
 
 	/*
 	 * 获取球员球队页面的路径
@@ -266,12 +274,12 @@ public class spyder4player extends spyderUtil implements spyderMethod,Runnable{
 			String[] infoarr = keyval.split("：");
 			String key = infoarr[0];
 			String val = infoarr[1];
-			System.out.println(key);
+//			System.out.println(key);
 			// 根据爬取的名称获取数据库字段名
 			String key1 = PlayerMap.get(key.trim());
 			playerMap.put(key1, val);
 			
-			 System.out.println(key +"  " + key1 + " " + val);
+//			 System.out.println(key +"  " + key1 + " " + val);
 
 		}
 		

@@ -11,5 +11,9 @@ public interface MyPlayerMapper {
 	int insertByMap(Map map);
 	
 	List<Player> searchMarchingPlayer(Map map);
+	
 	Map<String,String> selectMaxDataFromPlayer();
+	
+	List<Player> findPlayerInfos(Map condition);
+	
 }

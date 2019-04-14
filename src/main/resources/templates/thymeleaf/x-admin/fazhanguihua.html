@@ -59,52 +59,22 @@
 
 					<div class="well sidebar-nav" style="height: 180px;">
 						<div class="layui-row">
-							<form class="layui-form layui-col-md12 x-so" id="">
-								<input type="text" name="playername" placeholder="请输入球员中文名"
+							<form class="layui-form layui-col-md12 x-so" id="queryDelpForm">
+								<input type="text" name="name" placeholder="请输入球员中文名"
 									autocomplete="off" class="layui-input btn-sm"
 									style="margin-left: 10%; width: 50%;" />
+									<input type="hidden"  name="playerid" id="playerid"/>
 								<button class="btn btn-sm btn-success" type="button"
-									style="width: 80px;background-color:#3399CC;" onclick="">查 询</button>
+									style="width: 80px;background-color:#3399CC;" onclick="findPlayerInfos();">查 询</button>
 							</form>
 
 							<table id="checkplayertable1"
 								style="display: block; height: 120px; overflow-y: scroll; margin: 6px; margin-left: 30px; margin-right: 30px; padding-left: 20px;">
+								
 								<tr style="margin-left: 20px;">
-									<td class="btn-sm violetBtn" id="kb1"
-										onclick='checkedPlayer1(this)'>kebi</td>
+									<td class="btn-sm violetBtn">显示球员列表</td>
 								</tr>
-								<tr style="margin-left: 20px;">
-									<td class="btn-sm violetBtn" id="kb2"
-										onclick='checkedPlayer1(this)'>kebi</td>
-								</tr>
-								<tr style="margin-left: 20px;">
-									<td class="btn-sm violetBtn" id="kb3"
-										onclick='checkedPlayer1(this)'>kebi</td>
-								</tr>
-								<tr style="margin-left: 20px;">
-									<td class="btn-sm violetBtn" id="kb4"
-										onclick='checkedPlayer1(this)'>kebi</td>
-								</tr>
-								<tr style="margin-left: 20px;">
-									<td class="btn-sm violetBtn" id="kb5"
-										onclick='checkedPlayer1(this)'>kebi</td>
-								</tr>
-								<tr style="margin-left: 20px;">
-									<td class="btn-sm violetBtn" id="kb6"
-										onclick='checkedPlayer1(this)'>kebi</td>
-								</tr>
-								<tr style="margin-left: 20px;">
-									<td class="btn-sm violetBtn" id="kb7"
-										onclick='checkedPlayer1(this)'>kebi</td>
-								</tr>
-								<tr style="margin-left: 20px;">
-									<td class="btn-sm violetBtn" id="kb8"
-										onclick='checkedPlayer1(this)'>kebi</td>
-								</tr>
-								<tr style="margin-left: 20px;">
-									<td class="btn-sm violetBtn" id="kb9"
-										onclick='checkedPlayer1(this)'>kebi</td>
-								</tr>
+								
 
 							</table>
 
@@ -114,16 +84,11 @@
 					<div class="sidebar-nav" style="height: 35px;">
 						<p style="margin-left: 10%;"><b  class="text-primary">球员发展建议：</b></p>
 					</div>
-					<div class="well sidebar-nav" style="height: 180px;padding:10px;">
+					<div class="well sidebar-nav" style="height: 180px;padding:10px;" id="adviseDesc">
 						<p  class="btn btn-sm btn-success" style="margin:4px;background-color:#96C;">
-							建议少吃辣椒，多吃肉，早期早说
+							此处用于显示球员发展建议
 						</p>
-						<p  class="btn btn-sm btn-success" style="margin:4px;background-color:#96C;">
-							建议少吃辣椒，多吃肉，早期早说
-						</p>
-						<p  class="btn btn-sm btn-success" style="margin:4px;background-color:#96C;">
-							建议少吃辣椒，多吃肉，早期早说
-						</p>
+						
 					</div>
 					
 				</div>
@@ -147,7 +112,7 @@ option = {
         }
     },
     legend: {
-        data:['超出标准数', '标准', '球员信息']
+        data:['高于标准数', '标准', '球员信息']
     },
     toolbox: {
         show : true,
@@ -169,7 +134,7 @@ option = {
         {
             type : 'category',
             axisTick : {show: false},
-            data : ['三分命中率','投篮命中率','罚球命中率','进攻','防守','速度','体质指数BMI']
+            data : ['三分命中率','投篮命中率','罚球命中率','体质指数BMI']
         }
     ],
     series : [
@@ -177,7 +142,7 @@ option = {
             name:'超出标准数',
             type:'bar',
             itemStyle : { normal: {label : {show: true, position: 'inside'}}},
-            data:[200, 170, 240, 244, 200, 220, 210]
+            data:[200, 170, 220, 210]
         },
         {
             name:'球员信息',
@@ -187,7 +152,7 @@ option = {
             itemStyle: {normal: {
                 label : {show: true}
             }},
-            data:[320, 302, 341, 374, 390, 450, 420]
+            data:[320, 302,  450, 420]
         },
         {
             name:'标准',
@@ -196,7 +161,7 @@ option = {
             itemStyle: {normal: {
                 label : {show: true, position: 'left'}
             }},
-            data:[-120, -132, -101, -134, -190, -230, -210]
+            data:[-120, -132, -230, -210]
         }
     ]
 };
