@@ -77,7 +77,7 @@ function finddetail(id){
 	        		    },
 	        		    legend: {
 	        		        x : 'center',
-	        		        data:[d1,d2,d3,d4,d5,d5]
+	        		        data:[d1,d2,d3,d4,d5,d6]
 	        		    },
 	        		    toolbox: {
 	        		        show : true,
@@ -115,7 +115,7 @@ function finddetail(id){
 	        		            },
 	        		            data : [
 	        		                {
-	        		                    value : [d1,d2,d3,d4,d5,d5],
+	        		                    value : [d1,d2,d3,d4,d5,d6],
 	        		                    name : name1
 	        		                }
 	        		            ]

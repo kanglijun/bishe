@@ -1,5 +1,6 @@
 package cn.qs.service.player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -108,10 +109,13 @@ public class PlayerServiceImpl implements PlayerService{
 	@Override
 	public Map<String, String> selectMaxDataPlayer() {
 		Map map = PlayerMapper.selectMaxDataFromPlayer();
+		if(map==null){
+			map = new HashMap();
+		}
 		System.out.println(map.toString());
-		Double maxd = Formatdata.format((String)map.get("maxd"));
-		Double maxf = Formatdata.format((String)map.get("maxf"));
-		Double maxz = Formatdata.format((String)map.get("maxz"));
+		Double maxd = Formatdata.format(String.valueOf((Double)map.get("maxs")));
+		Double maxf = Formatdata.format(String.valueOf((Double)map.get("maxf")));
+		Double maxz = Formatdata.format(String.valueOf((Double)map.get("maxz")));
 		Double quan = 0.2;
 
 		Double maxj = (maxd*quan)+(maxf*quan)+(maxz*quan)+20+20;
@@ -119,8 +123,20 @@ public class PlayerServiceImpl implements PlayerService{
 		map.put("maxf",maxf);
 		map.put("maxz",maxz);
 		map.put("maxj",maxj);
+		System.out.println("maxzonghe"+maxj);
 		
 		return map;
 	}
+	
+
+	@Override
+	public List<Player> searchMarchingPlayer(Map map) {
+		List<Player> list = new ArrayList<Player>();
+		
+		list = PlayerMapper.searchMarchingPlayer(map);
+		
+		return list;
+	}
+	
 
 }

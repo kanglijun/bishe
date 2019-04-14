@@ -28,6 +28,8 @@ public interface PlayerService {
 	
 	public List<Player> selectPlayerDetail(Map map);
 	
+	public List<Player> searchMarchingPlayer(Map map);
+	
 	public Map<String,String> selectMaxDataPlayer();
 
 }

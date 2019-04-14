@@ -33,5 +33,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="src/main/resources/jar/jsoup-1.8.3.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

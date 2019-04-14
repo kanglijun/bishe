@@ -5,8 +5,12 @@ public class Formatdata {
 		Double result = 0.0;
 		if(str!=null&&!"".equals(str)){
 			String temp = str.replace("%", "");
-			result = Double.valueOf(str);
+			result = Double.valueOf(temp);
 		}
 		return result;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(format("35.8%"));
 	}
 }

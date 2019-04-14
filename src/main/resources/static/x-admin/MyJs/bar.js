@@ -78,7 +78,7 @@ function finddetail(id){
 	        type:'post',
 	        async:true,
 	        success:function(data){
-	        	alert(data[0].name);
+	        	alert(data[0].name+":"+data[1].name);
 	        	//在echartsExample.js中定义myChart
 	        	//var title = 
 	        	//myChart.setOption(title);

@@ -140,14 +140,14 @@ public class PlayerContrller {
 		System.out.println("球员比较");
 		Map map1 = new HashMap();
 		List<Player> players = playerService.selectPlayerDetail(map1);
-//		Map maxmap = playerService.selectMaxDataPlayer();
+		Map maxmap = playerService.selectMaxDataPlayer();
 		map.addAttribute("players", players);
-//		map.addAttribute("maxdefen", maxmap.get("maxd"));
-//		map.addAttribute("maxfangshou", maxmap.get("maxf"));
-//		map.addAttribute("maxzuzhi", maxmap.get("maxz"));
-//		map.addAttribute("maxwaixian", "100");
-//		map.addAttribute("maxneixian", "100");
-//		map.addAttribute("maxzonghe", maxmap.get("maxj"));
+		map.addAttribute("maxdefen", maxmap.get("maxs"));
+		map.addAttribute("maxfangshou", maxmap.get("maxf"));
+		map.addAttribute("maxzuzhi", maxmap.get("maxz"));
+		map.addAttribute("maxwaixian", "100");
+		map.addAttribute("maxneixian", "100");
+		map.addAttribute("maxzonghe", maxmap.get("maxj"));
 		return "bar";
 	}
 	
@@ -185,6 +185,7 @@ public class PlayerContrller {
 		condition.put("waixian", w);
 		condition.put("neixian", n);
 		condition.put("zonghe", j);
+		System.out.println("zonghe:"+j);
 		
 		return condition;
 	}
@@ -229,6 +230,17 @@ public class PlayerContrller {
 	public JSONResultUtil doUpdateUser(Player player) {
 		playerService.updatePlayer(player);
 		return JSONResultUtil.ok();
+	}
+	
+	/*
+	 * 球员匹配度
+	 */
+	@RequestMapping("searchMarchingPlayer")
+	@ResponseBody
+	public List<Player> searchMarchingPlayer(@RequestParam Map condition) {
+		List<Player> list = new ArrayList<Player>();
+		list = playerService.searchMarchingPlayer(condition);
+		return list;
 	}
 	
 }

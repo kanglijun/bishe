@@ -7,5 +7,9 @@ import cn.qs.bean.Player;
 
 public interface MyPlayerMapper {
 	List<Player> selectPlayersByMap(Map map);
+	
+	int insertByMap(Map map);
+	
+	List<Player> searchMarchingPlayer(Map map);
 	Map<String,String> selectMaxDataFromPlayer();
 }

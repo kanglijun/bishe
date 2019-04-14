@@ -41,25 +41,27 @@
 
 <body class="layui-anim layui-anim-up">
 
+	<from id="getwebinfoForm"> <input type="hidden"
+		id="PCplayerflag" name="flag" value="0" /> <input type="hidden"
+		id="PCteamflag" name="flag" value="0" /> </from>
 	<div class="x-body">
 		<div class="layui-row">
-			
-				<div >
-					<div class="layui-input-inline">
-						<select name="PCinfo" lay-verify=""  >
-							<option value="" disabled="disabled" margin-top="10px;">请选择</option>
-							<option value="PCplayer">球员信息</option>
-							<option value="PCteam">球队信息</option>
-							<option value="PCranking">排行版信息</option>
-							<option value="PCall" selected="selected">所有</option>
-						</select>
-					</div>
-					
-					<button class="layui-btn" type="button" onclick="">
-							开始获取数据 <i class="layui-icon">&#xe615;</i>
-					</button>
+
+			<div>
+				<div class="layui-input-inline">
+					<select name="PCinfo" lay-verify="" id="spyderSelect">
+						<option value="" disabled="disabled" margin-top="10px;">请选择</option>
+						<option value="PCplayer">球员信息</option>
+						<option value="PCteam">球队信息</option>
+						<option value="PCall" disabled="disabled">所有</option>
+					</select>
 				</div>
-			
+
+				<button class="layui-btn" type="button" onclick="getwebinfos();">
+					开始获取数据 <i class="layui-icon">&#xe615;</i>
+				</button>
+			</div>
+
 		</div>
 
 		<table class="layui-table">
@@ -67,7 +69,8 @@
 				<tr>
 					<th><fieldset class="layui-elem-field layui-field-title"
 							style="margin-top: 50px;">
-							<legend>正在网页数据爬虫....</legend>
+							<legend id = "legenddesc">欢迎进入网页获取数据页面</legend>
+							
 						</fieldset></th>
 				</tr>
 				<tr>
@@ -76,21 +79,20 @@
 						<div class="layui-progress layui-progress-big"
 							lay-showpercent="true" lay-filter="demo">
 							<div class="layui-progress-bar layui-bg-red" lay-percent="0%"
-								style="width: 50%">
-								<span class="layui-progress-text">50%</span>
+								style="width: 0%" id="nowProgress">
+								<span class="layui-progress-text" id="nowProgressdesc"></span>
 							</div>
 						</div>
 					</th>
 				</tr>
 
 			</thead>
-			<tbody id="memberTbody">
-				<tr>
-					<th></th>
-				</tr>
-			</tbody>
 		</table>
+		<div id="member-div" style="overflow: auto; max-height: 250px;">
+			<ul id="memberTbody">
 
+			</ul>
+		</div>
 	</div>
 </body>
 </html>
