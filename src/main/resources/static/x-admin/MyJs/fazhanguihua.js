@@ -1,5 +1,7 @@
 
-
+window.onload=function(){
+	findPlayerInfos();
+}
 
 function findPlayerInfos() {
 	$.ajax({
