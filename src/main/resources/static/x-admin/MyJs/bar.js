@@ -11,7 +11,7 @@ function querybar1(){
          	
          	for(var i=0;i<datas.length;i++){
          		 var tr = '<tr style="margin-left:20px;">'
-         	            +'<td value="'+datas[i].playerId+'" id="'+datas[i].playerId+'" class="btn-sm violetBtn" onclick="checkedPlayer1(this)">'
+         	            +'<td value="'+datas[i].playerId+'" id="-a'+datas[i].playerId+'" class="btn-sm violetBtn" onclick="checkedPlayer1(this)">'
          	            + datas[i].name+'</td></tr>';
          		 $("#checkplayertable1").append(tr);
          	}
@@ -31,7 +31,7 @@ function querybar2(){
          	
          	for(var i=0;i<datas.length;i++){
          		 var tr = '<tr style="margin-left:20px;">'
-         	            +'<td value="'+datas[i].playerId+'" id="'+datas[i].playerId+'" class="btn-sm violetBtn" onclick="checkedPlayer2(this)">'
+         	            +'<td value="'+datas[i].playerId+'" id="-b'+datas[i].playerId+'" class="btn-sm violetBtn" onclick="checkedPlayer2(this)">'
          	            + datas[i].name+'</td></tr>';
          		 $("#checkplayertable2").append(tr);
          	}

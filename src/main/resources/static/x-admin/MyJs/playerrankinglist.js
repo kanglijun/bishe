@@ -40,7 +40,7 @@ function showUsersTable(pageInfo){
             +'<td>'+index+'</td>'
             //+'<td>'+replaceNull(playerRs[i].playerRId)+'</td>'
             +'<td>'+replaceNull(playerRs[i].name)+'</td>'
-            +'<td>'+replaceNull(playerRs[i].team.teamName)+'</td>'
+            /*+'<td>'+replaceNull(playerRs[i].team.teamName)+'</td>'*/
             +'<td>'+replaceNull(playerRs[i].score)+'</td>'
             +'<td>'+replaceNull(playerRs[i].backboard)+'</td>'
             +'<td>'+replaceNull(playerRs[i].steals)+'</td>'

@@ -53,7 +53,7 @@ function showUsersTable(pageInfo){
             +'<td>'+index+'</td>'
             //+'<td>'+replaceNull(players[i].playerId)+'</td>'
             +'<td>'+replaceNull(players[i].name)+'</td>'
-            +'<td>'+replaceNull(players[i].team.teamName)+'</td>'
+            /*+'<td>'+replaceNull(players[i].team.teamName)+'</td>'*/
             +'<td>'+replaceNull(players[i].number)+'</td>'
             +'<td>'+replaceNull(players[i].location)+'</td>'
             +'<td>'+replaceNull(players[i].height)+'</td>'
