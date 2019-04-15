@@ -50,6 +50,9 @@ function getwebinfos() {
 									+ indexLength + "em;'>" + list[i] + "</li>"
 
 					)
+					
+					$("#member-div").scrollTop($("#member-div").scrollHeight);
+					
 					if ("完毕" == list[i]) {
 						closeTask();
 						$("#legenddesc").text("从网页数据获取数据完成");

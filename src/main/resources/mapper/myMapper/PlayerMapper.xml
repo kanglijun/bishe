@@ -271,6 +271,20 @@
 
 
 	</select>  
+		<select id="findPlayerInfos" resultMap="playerTeamDetail" parameterType="map">
+		 select * from player 
+		 <where>
+		  1=1
+		 	<if test="playerid!=null and playerid!=''">
+		 		and player_id = #{playerid}
+		 	</if>
+		 	<if test="name!=null and name!=''">
+		 		and player.name LIKE CONCAT(CONCAT('%', #{name}),'%') 
+		 	</if>
+		 </where>
+		
+	</select>
+	
 </mapper> 
 
 

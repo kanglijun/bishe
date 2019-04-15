@@ -12,4 +12,6 @@ public interface MyPlayerMapper {
 	
 	List<Player> searchMarchingPlayer(Map map);
 	Map<String,String> selectMaxDataFromPlayer();
+	List<Player> findPlayerInfos(Map condition);
+	
 }

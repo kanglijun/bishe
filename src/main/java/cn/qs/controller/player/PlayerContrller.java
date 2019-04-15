@@ -21,6 +21,7 @@ import com.github.pagehelper.PageInfo;
 import cn.qs.bean.Player;
 import cn.qs.bean.Team;
 import cn.qs.bean.User;
+import cn.qs.service.devolop.devolopPlan;
 import cn.qs.service.player.Formatdata;
 import cn.qs.service.player.PlayerService;
 import cn.qs.service.team.TeamService;
@@ -39,6 +40,8 @@ public class PlayerContrller {
 	private PlayerService playerService;
 	@Autowired
 	private TeamService teamService;
+	@Autowired
+	private devolopPlan devolopService;
 
 	/**
 	 * 添加player
@@ -286,5 +289,26 @@ public class PlayerContrller {
 		}
 		return score*0.2+fs*0.2+zz*0.2+wx*0.2+nx*0.2;
 	}
+	
+	/*
+	 * 查询信息
+	 */
+	@RequestMapping("/findPlayerInfo")
+	@ResponseBody
+	public List<Player> findPlayerInfos(@RequestParam Map condition){
+		List<Player> list = devolopService.findPlayerInfos(condition);
+		return list;
+	}
+	
+	/*
+	 * 发展规划
+	 */
+	@RequestMapping("/buildDevolopPlan")
+	@ResponseBody
+	public Map buildDevolopPlan(@RequestParam Map condition){
+		Map map = devolopService.buildDevolopPlan(condition);
+		return map;
+	}
+	
 	
 }
